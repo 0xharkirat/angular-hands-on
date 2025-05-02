@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HousingLocationComponent} from '../housing-location/housing-location.component';
 
 import { HousingService } from '../housing.service';
-import { Housinglocation } from '../housinglocation';
+import { HousingLocation } from '../housinglocation';
 @Component({
   selector: 'app-home',
   imports: [CommonModule, HousingLocationComponent],
@@ -28,12 +28,14 @@ import { Housinglocation } from '../housinglocation';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  housingLocationList: Housinglocation[] = [];
+  housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
-  filteredLocationList: Housinglocation[] = [];
+  filteredLocationList: HousingLocation[] = [];
   constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations();
-    this.filteredLocationList = this.housingLocationList;
+    this.housingService.getAllHousingLocation().then((housingLocationList: HousingLocation[]) => {
+      this.housingLocationList = housingLocationList;
+      this.filteredLocationList = this.housingLocationList;
+    })
   }
   filterResults(text: string) {
     if (!text) {
