@@ -9,16 +9,20 @@ import { Housinglocation } from '../housinglocation';
   imports: [CommonModule, HousingLocationComponent],
   template: `
     <section>
-      <form>
-        <input type="text" placeholder="Filter by city" #filter />
-        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
-      </form>
+    <input
+    type="text"
+    placeholder="Filter by city"
+    #filter
+    autofocus
+    (input)="filterResults(filter.value)"
+  />
     </section>
     <section class="results">
       <app-housing-location
         *ngFor="let housingLocation of filteredLocationList"
         [housingLocation]="housingLocation"
       ></app-housing-location>
+      <p *ngIf="filteredLocationList.length === 0">No results found.</p>
     </section>
   `,
   styleUrls: ['./home.component.css'],
