@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Housinglocation } from '../housinglocation';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-housing-location',
-  imports: [],
+  imports: [CommonModule, RouterModule],
   template: `
    <section class="listing">
     <img [src]="housingLocation.photo" alt="Exterior photo of {{
@@ -15,6 +16,7 @@ import { Housinglocation } from '../housinglocation';
     <p class="listing-location">
       {{ housingLocation.city}}, {{ housingLocation.state}}
     </p>
+    <a [routerLink]="['/details', housingLocation.id]">Learn More</a>
    </section>
 
   `,
